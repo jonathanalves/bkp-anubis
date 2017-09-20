@@ -218,7 +218,7 @@ public abstract class GenericController<Gbean extends SimpleGenericBean, Gdto ex
 	
 	@Transactional(readOnly=true)
 	@RequestMapping(value = "/pagination", method = RequestMethod.POST)
-	public Map<String, Object> pagination(@RequestBody @Valid QueryDataTablesDTO query) {
+	public Map<String, Object> pagination(@RequestBody QueryDataTablesDTO query) {
 		return business.pagination(query);
 	}
 	
