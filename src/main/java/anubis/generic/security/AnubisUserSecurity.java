@@ -13,6 +13,10 @@ public abstract class AnubisUserSecurity extends User {
 
 	private SimpleGenericBean bean;
 	
+	public SimpleGenericBean getBean() {
+		return bean;
+	}
+	
 	//FIXME PHILIPE CRIAR UMA INTERFACE PARA FAZER O LOGIN E INJETAR A MESMA PARA REMOVER O CONFIGURATION GENERIC BEAN
 	public AnubisUserSecurity(SimpleGenericBean bean, String username, String password, boolean enabled, boolean accountNonExpired,
 			boolean credentialsNonExpired, boolean accountNonLocked,
