@@ -1,6 +1,10 @@
 package anubis.utils;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import anubis.response.ResponseException;
 
@@ -50,6 +54,11 @@ public class FileUtils {
 			}
 		}
 		return file;
+	}
+	
+	public static void saveFile(byte[] file, String pathName, String fileName) throws IOException {
+        Path path = Paths.get(pathName + File.separator + fileName);
+        Files.write(path, file);
 	}
 	
 }
