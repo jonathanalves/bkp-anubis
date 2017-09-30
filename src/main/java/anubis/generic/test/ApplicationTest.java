@@ -167,7 +167,7 @@ public abstract class ApplicationTest {
 	}
 
 	public MvcResult callMethodController(boolean useContains, Map<String, Object> map, Object content, HttpStatus status, HttpMethod method, String message, String url, Object... args) throws Exception {
-		String slug = (url!=null && url.startsWith("#/")) ? "" : getSlug();
+		String slug = (url.startsWith("#/")) ? "" : getSlug();
 		url = url.replace("#", "");
 		
 		MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.request(method, URL_API + slug + url, args)

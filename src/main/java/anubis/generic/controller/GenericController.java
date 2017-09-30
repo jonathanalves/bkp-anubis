@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -87,6 +88,7 @@ public abstract class GenericController<Gbean extends SimpleGenericBean, Gdto ex
 		checkConverterFields(dto, bean, bean.getClass(), dto.getClass());
 	}
 	
+	@CacheEvict(value = "publicLists")
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Transactional(rollbackFor = {Exception.class, Throwable.class}, timeout = 120, propagation = Propagation.NESTED)
 	@RequestMapping(value = "", method = RequestMethod.POST)
@@ -125,7 +127,8 @@ public abstract class GenericController<Gbean extends SimpleGenericBean, Gdto ex
 	protected void completeUpdate(Gdto dto, Gbean bean, Gbean beanOld) {
 		checkConverterFields(dto, bean, bean.getClass(), dto.getClass());
 	}
-	
+
+	@CacheEvict(value = "publicLists")
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Transactional(rollbackFor = {Exception.class, Throwable.class}, timeout = 120, propagation = Propagation.NESTED)
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
@@ -174,7 +177,8 @@ public abstract class GenericController<Gbean extends SimpleGenericBean, Gdto ex
 	
 	
 	//##################################### DELETE #####################################
-	
+
+	@CacheEvict(value = "publicLists")
 	@SuppressWarnings("rawtypes")
 	@Transactional(rollbackFor = {Exception.class, Throwable.class}, timeout = 120)
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -211,7 +215,7 @@ public abstract class GenericController<Gbean extends SimpleGenericBean, Gdto ex
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Response getById(@PathVariable("id") Long id) throws Exception {
+	public Response getById(@PathVariable("id") Long id) {
 		Gdto dto = (Gdto) business.getDTO(id);
 		return Response.returnObject(populateDTO(dto));
 	}
