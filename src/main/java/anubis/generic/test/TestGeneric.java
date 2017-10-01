@@ -39,6 +39,7 @@ public abstract class TestGeneric<Gbean extends SimpleGenericBean, Gdto extends 
 	
 	protected Gdto gDto;
 	
+	@Override
 	public boolean isMasculino() {
 		BeanProperties properties = getClazz().getAnnotation(BeanProperties.class);
 		return properties.gender().isMale();

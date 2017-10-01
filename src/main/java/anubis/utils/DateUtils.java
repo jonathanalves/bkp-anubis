@@ -224,12 +224,11 @@ public class DateUtils {
 			timeInSeconds = timeInSeconds * -1;
 		}
 
-		int hours, minutes, seconds;
-		hours = timeInSeconds / 3600;
+		int hours = timeInSeconds / 3600;
 		timeInSeconds = timeInSeconds - (hours * 3600);
-		minutes = timeInSeconds / 60;
+		int minutes = timeInSeconds / 60;
 		timeInSeconds = timeInSeconds - (minutes * 60);
-		seconds = timeInSeconds;
+		int seconds = timeInSeconds;
 		return String.format("%02d", hours) + ":" + String.format("%02d", minutes) + ":" + String.format("%02d", seconds);
 	}
 	
@@ -255,12 +254,11 @@ public class DateUtils {
 			timeInSeconds = timeInSeconds * -1;
 		}
 		
-		int hours, minutes, seconds;
-		hours = timeInSeconds / 3600;
+		int hours = timeInSeconds / 3600;
 		timeInSeconds = timeInSeconds - (hours * 3600);
-		minutes = timeInSeconds / 60;
+		int minutes = timeInSeconds / 60;
 		timeInSeconds = timeInSeconds - (minutes * 60);
-		seconds = timeInSeconds;
+		int seconds = timeInSeconds;
 		return String.format("%02d", hours) + ":" + String.format("%02d", minutes) + ":" + String.format("%02d", seconds);
 		
 	}

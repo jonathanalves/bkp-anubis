@@ -146,7 +146,8 @@ public abstract class ConfigurationTestGeneric<Gbean extends ConfigurationGeneri
 	public List<Gbean> getListAll(boolean isAtivo, String orderBy) {
 		return dao.listAll(isAtivo, orderBy);
 	}
-	
+
+	@Override
 	protected Map<Long, Gbean> initialRecords() throws Exception {
 		Map<Long, Gbean> initialRecords = new HashMap<>();
 		

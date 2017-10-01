@@ -30,7 +30,7 @@ public class QueryDataTablesDTO implements Serializable {
 	}
 	
 	public String getOrderByDirection(){
-		return ( this.orderByDirection != null ) ? this.orderByDirection.toString().toLowerCase() : "asc";
+		return ( this.orderByDirection != null ) ? this.orderByDirection.toLowerCase() : "asc";
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })

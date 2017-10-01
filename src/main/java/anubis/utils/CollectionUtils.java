@@ -20,5 +20,15 @@ public class CollectionUtils {
         }
 		return list;
 	}
-
+	
+	public static boolean compareWithMany(Object first, Object next, Object... rest) {
+		if (first.equals(next))
+			return true;
+		for (int i = 0; i < rest.length; i++) {
+			if (first.equals(rest[i]))
+				return true;
+		}
+		return false;
+	}
+	
 }
