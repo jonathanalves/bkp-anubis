@@ -88,7 +88,7 @@ public abstract class GenericController<Gbean extends SimpleGenericBean, Gdto ex
 		checkConverterFields(dto, bean, bean.getClass(), dto.getClass());
 	}
 	
-	@CacheEvict(value = "publicLists")
+	@CacheEvict(value = "publicLists", allEntries = true)
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Transactional(rollbackFor = {Exception.class, Throwable.class}, timeout = 120, propagation = Propagation.NESTED)
 	@RequestMapping(value = "", method = RequestMethod.POST)
@@ -128,7 +128,7 @@ public abstract class GenericController<Gbean extends SimpleGenericBean, Gdto ex
 		checkConverterFields(dto, bean, bean.getClass(), dto.getClass());
 	}
 
-	@CacheEvict(value = "publicLists")
+	@CacheEvict(value = "publicLists", allEntries = true)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Transactional(rollbackFor = {Exception.class, Throwable.class}, timeout = 120, propagation = Propagation.NESTED)
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
@@ -178,7 +178,7 @@ public abstract class GenericController<Gbean extends SimpleGenericBean, Gdto ex
 	
 	//##################################### DELETE #####################################
 
-	@CacheEvict(value = "publicLists")
+	@CacheEvict(value = "publicLists", allEntries = true)
 	@SuppressWarnings("rawtypes")
 	@Transactional(rollbackFor = {Exception.class, Throwable.class}, timeout = 120)
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
