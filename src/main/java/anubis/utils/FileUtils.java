@@ -123,11 +123,14 @@ public class FileUtils {
 		return valido;
 	}
 	
-	
 	public static void getFile(HttpServletResponse response, String path, String nameFile) {
+		getFile(response, path, nameFile, true);
+	}
+	
+	public static void getFile(HttpServletResponse response, String path, String nameFile, boolean forceDownload) {
 		InputStream in = null;
 		ServletOutputStream out = null;
-		try {
+		try  {
 			
 			File file = new File(path);
 			if(!file.exists()) {
@@ -137,7 +140,11 @@ public class FileUtils {
 			String name = ((nameFile!=null) ? nameFile : file.getName());
 			
 			in = new BufferedInputStream(new FileInputStream(file));
-			response.setHeader("Content-Disposition", "attachment; filename=" + name );
+			
+			if(forceDownload) {
+				response.setHeader("Content-Disposition", "attachment; filename=" + name );
+			}
+			
 			out = response.getOutputStream();
 			int c;
 			while ((c = in.read()) != -1) {
