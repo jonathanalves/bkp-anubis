@@ -88,7 +88,7 @@ public class FileUtils {
 			throw new ResponseException("utils.separador.diretorio.nao.permitido");
 		}
 
-		String fileName = DateUtils.getDiaMesAno(DateUtils.getCalendar()) + "-" + generateCode();
+		String fileName = generateCode().substring(0, 8) + "-" + file.getOriginalFilename();
 
 		if (file.isEmpty()) {
 			throw new ResponseException("utils.arquivo.especifico.vazio", name);
