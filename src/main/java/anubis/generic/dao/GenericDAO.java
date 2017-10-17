@@ -239,8 +239,10 @@ public class GenericDAO <T extends SimpleGenericBean> extends InstanceDAO<T> {
 		Query query = getDTOsQuery( queryDT, hql.toString() );
 		
 		//=============================== SETA PAGINAÇÃO ======================================
-		query.setFirstResult((queryDT.getPagina() - 1) * queryDT.getQuantidade() );
-		query.setMaxResults(queryDT.getQuantidade());
+		if(queryDT.getQuantidade() > 0) {
+			query.setFirstResult((queryDT.getPagina() - 1) * queryDT.getQuantidade() );
+			query.setMaxResults(queryDT.getQuantidade());
+		}
 		
 		return query.getResultList();
 	}
