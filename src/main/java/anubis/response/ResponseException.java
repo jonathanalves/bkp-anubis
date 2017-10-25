@@ -15,6 +15,7 @@ public class ResponseException extends RuntimeException  {
 	private static final long serialVersionUID = 5242151978325562763L;
 
 	private Response response;
+	private Exception exception;
 
 	public ResponseException(Response response) {
 		this.response = response;
@@ -51,11 +52,16 @@ public class ResponseException extends RuntimeException  {
 		response.setStatus(EnumStatusRetorno.ERROR);
 		response.setMessage(MessageSystem.formatMessage(message, params));
 		this.response = response;
+		this.exception = exception;
 	}
 	
-	
+
 	public Response getResponse() {
 		return response;
+	}
+
+	public Exception getException() {
+		return exception;
 	}
 	
 	@Override
