@@ -15,7 +15,6 @@ import anubis.MessageSystem;
 import anubis.generic.bean.AuditoriaBean;
 import anubis.generic.dao.AuditoriaDAO;
 import anubis.generic.dto.AuditoriaDTO;
-import anubis.response.Response;
 import anubis.response.ResponseException;
 import anubis.utils.DateUtils;
 
