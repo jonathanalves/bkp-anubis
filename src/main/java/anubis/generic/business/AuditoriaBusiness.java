@@ -41,7 +41,7 @@ public class AuditoriaBusiness extends GenericBusiness<AuditoriaBean, AuditoriaD
 		dao.persist(auditoria);
 	}
 	
-	public Response getAuditoria(String identificador, Long id) throws JsonParseException, JsonMappingException, IOException{
+	public List<AuditoriaDTO> getAuditoria(String identificador, Long id) throws JsonParseException, JsonMappingException, IOException{
 		if(id == null) {
 			throw new ResponseException("business.auditoria.informe.id");
 		}
@@ -75,7 +75,7 @@ public class AuditoriaBusiness extends GenericBusiness<AuditoriaBean, AuditoriaD
 			retorno.add(dto);
 		}
 		
-		return Response.returnObject(retorno, "bean.auditorias");
+		return retorno;
 	}
 
 }
