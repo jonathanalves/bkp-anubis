@@ -220,7 +220,14 @@ public class GenericDAO <T extends SimpleGenericBean> extends InstanceDAO<T> {
 		Query query = getDTOsQuery( queryDT, hql.toString() );
 		return (Integer) query.getSingleResult();
 	}
-	
+
+	public String getOrderPagination(QueryDataTablesDTO queryDT){
+		if(queryDT.getOrderBy() != null){
+			return " ORDER BY " + queryDT.getOrderBy() + " " + queryDT.getOrderByDirection() + " NULLS LAST";
+		}
+		return "";
+	}
+
 	@SuppressWarnings("rawtypes")
 	public List getDTOs(QueryDataTablesDTO queryDT){
 		StringBuilder hql = new StringBuilder();
@@ -231,9 +238,7 @@ public class GenericDAO <T extends SimpleGenericBean> extends InstanceDAO<T> {
 		hql.append(getDTOsHQL(queryDT));
 
 		//=============================== ORDENAÇÃO ======================================
-		if(queryDT.getOrderBy() != null){
-			hql.append(" ORDER BY " + queryDT.getOrderBy() + " " + queryDT.getOrderByDirection() + " NULLS LAST" );
-		}
+		hql.append(getOrderPagination(queryDT) );
 
 		//============================= CRIA QUERY ========================================
 		Query query = getDTOsQuery( queryDT, hql.toString() );
