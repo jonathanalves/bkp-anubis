@@ -123,8 +123,13 @@ public abstract class ApplicationTest {
 		callMethodController(false, null, null, getHttpStatus(status), HttpMethod.POST, null, url, args);
 	}
 	
+    
 	public void callMethodControllerPost(Object content, EnumStatusResponseTest status, String message, String url, Object... args) throws Exception{
 		callMethodController(false, null, content, getHttpStatus(status), HttpMethod.POST, message, url, args);
+	}
+	
+	public void callMethodControllerPost(Object content, boolean useContains, EnumStatusResponseTest status, String message, String url, Object... args) throws Exception{
+		callMethodController(useContains, null, content, getHttpStatus(status), HttpMethod.POST, message, url, args);
 	}
 	
 	public void callMethodControllerPost(EnumStatusResponseTest status, String message, String url, Object... args) throws Exception{
