@@ -84,11 +84,13 @@ public class FileUtils {
 	
 	public static String upload(String path, String name, MultipartFile file) {
 
+		name = (name == null) ? file.getOriginalFilename() : name + getFileType(file);
+
 		if (name.contains("/")) {
 			throw new ResponseException("utils.separador.diretorio.nao.permitido");
 		}
 
-		String fileName = generateCode().substring(0, 8) + "-" + file.getOriginalFilename();
+		String fileName = generateCode().substring(0, 8) + "-" + name;
 
 		if (file.isEmpty()) {
 			throw new ResponseException("utils.arquivo.especifico.vazio", name);
@@ -109,7 +111,12 @@ public class FileUtils {
 		return fileName;
 
 	}
-	
+
+	private static String getFileType(MultipartFile file) {
+		String name = file.getOriginalFilename();
+		return name.substring(file.getOriginalFilename().lastIndexOf("."), name.length());
+	}
+
 	public static boolean isImagemValida(byte[] bytes) {
 		boolean valido = true;
 		try {
@@ -134,7 +141,7 @@ public class FileUtils {
 			
 			File file = new File(path);
 			if(!file.exists()) {
-				throw new ResponseException("utils.arquivo.nao.encontrado");
+				throw new ResponseException("utils.arquivo.erro.upload");
 			}
 			
 			String name = ((nameFile!=null) ? nameFile : file.getName());
@@ -190,5 +197,5 @@ public class FileUtils {
 			}
 		}
 	}
-	
+
 }
