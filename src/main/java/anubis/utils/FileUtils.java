@@ -103,14 +103,20 @@ public class FileUtils {
 
 	}
 
-	private static String processFileName(String name, MultipartFile file) {
-		String fileName = (name == null) ? file.getOriginalFilename() : name;
-		fileName = generateCode().substring(0, 8) + "-" + fileName;
-
-		if( !containsType(fileName) ) {
-			fileName += getFileType(file);
+	private static String processFileName(String fileName, MultipartFile file) {
+		if (fileName == null || fileName.isEmpty()) {
+			return generateFileName(file.getOriginalFilename());
+		}
+		fileName = generateFileName(fileName);
+		String type = getFileType(file);
+		if( !fileName.contains(type) ) {
+			fileName += type;
 		}
 		return fileName;
+	}
+
+	private static String generateFileName(String name) {
+		return generateCode().substring(0, 8) + "-" + name;
 	}
 
 	private static void validar(String name, MultipartFile file) {
@@ -121,10 +127,6 @@ public class FileUtils {
 		if (file.isEmpty()) {
 			throw new ResponseException("utils.arquivo.especifico.vazio", name);
 		}
-	}
-
-	private static boolean containsType(String name) {
-		return name.contains(".");
 	}
 
 	private static String getFileType(MultipartFile file) {

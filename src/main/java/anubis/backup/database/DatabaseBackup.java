@@ -21,7 +21,7 @@ public class DatabaseBackup {
 	protected String pgDumpCommand;
 	protected String loginDropbox;
 	protected String tokenDropbox;
-	
+
 	public DatabaseBackup(String directoryName, String backupName, Integer maxBackups, String pgDumpCommand, String loginDropbox, String tokenDropbox) {
 		this.directoryName = directoryName;
 		this.backupName = backupName;
@@ -40,58 +40,49 @@ public class DatabaseBackup {
 			throw new ResponseException("system.comando.dump.nao.encontrado");
 		}
 	}
-	
-	public void generateBackupDatabase(boolean isSendToDropbox, Calendar data) {
-		try {
-			checkPgDumpCommand();
-			String pathFileBackup = createBackupBanco(data);
-			removeOldsBackups();
-			if(isSendToDropbox) {
-				File fileBackup = new File(pathFileBackup);
-				DropBoxSendFiles.send(fileBackup, this.loginDropbox, this.loginDropbox);
-			}
-		} catch(Exception e){
-			e.printStackTrace();
-			throw e;
+
+	public void generateBackupDatabase(boolean isSendToDropbox, Calendar data) throws Exception {
+		checkPgDumpCommand();
+		String pathFileBackup = createBackupBanco(data);
+		removeOldsBackups();
+		if(isSendToDropbox) {
+			File fileBackup = new File(pathFileBackup);
+			DropBoxSendFiles.send(fileBackup, this.loginDropbox, this.loginDropbox);
 		}
 	}
 
-	private String createBackupBanco(Calendar data) {
+	private String createBackupBanco(Calendar data) throws InterruptedException, IOException {
 		String pathFileBackup = null;
-		try {
-			String nomeFileBackup = createNameBackup(data);
-			File dirBackupDatabase = new File(directoryName);
-			FileUtils.verifyDirExist(dirBackupDatabase);
+		String nomeFileBackup = createNameBackup(data);
+		File dirBackupDatabase = new File(directoryName);
+		FileUtils.verifyDirExist(dirBackupDatabase);
 
-			pathFileBackup = directoryName + FileUtils.SEPARATOR + nomeFileBackup;
-			ProcessBuilder builder = new ProcessBuilder(
-					pgDumpCommand,
-					"-F", //format (c -> custom, p -> plain, t -> tar)
-					"c",
-					"-n", //schema
-					"public",
-					"-E", //enconding
-					"UTF-8",
-					"-f", //file output
-					pathFileBackup
-					);
+		pathFileBackup = directoryName + FileUtils.SEPARATOR + nomeFileBackup;
+		ProcessBuilder builder = new ProcessBuilder(
+				pgDumpCommand,
+				"-F", //format (c -> custom, p -> plain, t -> tar)
+				"c",
+				"-n", //schema
+				"public",
+				"-E", //enconding
+				"UTF-8",
+				"-f", //file output
+				pathFileBackup
+		);
 
-			Map<String, String> env = builder.environment();
+		Map<String, String> env = builder.environment();
 
-			env.put("PGHOST", System.getProperty("app.database.address"));
-			env.put("PGPORT", System.getProperty("app.database.port"));
-			env.put("PGDATABASE", System.getProperty("app.database.name"));
-			env.put("PGUSER", System.getProperty("app.database.user"));
-			env.put("PGPASSWORD", System.getProperty("app.database.password"));
-			builder.redirectErrorStream(true);
+		env.put("PGHOST", System.getProperty("app.database.address"));
+		env.put("PGPORT", System.getProperty("app.database.port"));
+		env.put("PGDATABASE", System.getProperty("app.database.name"));
+		env.put("PGUSER", System.getProperty("app.database.user"));
+		env.put("PGPASSWORD", System.getProperty("app.database.password"));
+		builder.redirectErrorStream(true);
 
-			Process p = builder.start();
-			int result = p.waitFor();
-			if(result != 0) {
-				throw new ResponseException("system.erro.realizar.backup.base.dados");
-			}
-		} catch (InterruptedException | IOException e) {
-			throw new ResponseException(e, "system.erro.realizar.backup.base.dados");
+		Process p = builder.start();
+		int result = p.waitFor();
+		if(result != 0) {
+			throw new ResponseException("system.erro.realizar.backup.base.dados");
 		}
 		return pathFileBackup;
 	}
