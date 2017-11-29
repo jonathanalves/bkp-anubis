@@ -78,18 +78,18 @@ public class DatabaseBackup {
 
 			Map<String, String> env = builder.environment();
 
-			env.put("PGHOST", System.getProperty("app.database.address"));  
-			env.put("PGPORT", System.getProperty("app.database.port"));  
+			env.put("PGHOST", System.getProperty("app.database.address"));
+			env.put("PGPORT", System.getProperty("app.database.port"));
 			env.put("PGDATABASE", System.getProperty("app.database.name"));
-			env.put("PGUSER", System.getProperty("app.database.user"));  
-			env.put("PGPASSWORD", System.getProperty("app.database.password"));  
+			env.put("PGUSER", System.getProperty("app.database.user"));
+			env.put("PGPASSWORD", System.getProperty("app.database.password"));
 			builder.redirectErrorStream(true);
 
 			Process p = builder.start();
 			int result = p.waitFor();
 			if(result != 0) {
 				throw new ResponseException("system.erro.realizar.backup.base.dados");
-			} 
+			}
 		} catch (InterruptedException | IOException e) {
 			throw new ResponseException(e, "system.erro.realizar.backup.base.dados");
 		}

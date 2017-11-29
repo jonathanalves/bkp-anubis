@@ -84,17 +84,8 @@ public class FileUtils {
 	
 	public static String upload(String path, String name, MultipartFile file) {
 
-		name = (name == null) ? file.getOriginalFilename() : name + getFileType(file);
-
-		if (name.contains("/")) {
-			throw new ResponseException("utils.separador.diretorio.nao.permitido");
-		}
-
-		String fileName = generateCode().substring(0, 8) + "-" + name;
-
-		if (file.isEmpty()) {
-			throw new ResponseException("utils.arquivo.especifico.vazio", name);
-		}
+		validar(name, file);
+		String fileName = processFileName(name, file);
 
 		try {
 			new File(path).mkdir();
@@ -112,9 +103,34 @@ public class FileUtils {
 
 	}
 
+	private static String processFileName(String name, MultipartFile file) {
+		String fileName = (name == null) ? file.getOriginalFilename() : name;
+		fileName = generateCode().substring(0, 8) + "-" + fileName;
+
+		if( !containsType(fileName) ) {
+			fileName += getFileType(file);
+		}
+		return fileName;
+	}
+
+	private static void validar(String name, MultipartFile file) {
+		if (name.contains("/")) {
+			throw new ResponseException("utils.separador.diretorio.nao.permitido");
+		}
+
+		if (file.isEmpty()) {
+			throw new ResponseException("utils.arquivo.especifico.vazio", name);
+		}
+	}
+
+	private static boolean containsType(String name) {
+		return name.contains(".");
+	}
+
 	private static String getFileType(MultipartFile file) {
-		String name = file.getOriginalFilename();
-		return name.substring(file.getOriginalFilename().lastIndexOf("."), name.length());
+		String multipartFileName = file.getOriginalFilename();
+		String type = multipartFileName.substring( multipartFileName.indexOf("."), multipartFileName.length());
+		return type;
 	}
 
 	public static boolean isImagemValida(byte[] bytes) {
@@ -141,7 +157,7 @@ public class FileUtils {
 			
 			File file = new File(path);
 			if(!file.exists()) {
-				throw new ResponseException("utils.arquivo.erro.upload");
+				throw new ResponseException("utils.arquivo.nao.encontrado");
 			}
 			
 			String name = ((nameFile!=null) ? nameFile : file.getName());
