@@ -84,15 +84,8 @@ public class FileUtils {
 	
 	public static String upload(String path, String name, MultipartFile file) {
 
-		if (name.contains("/")) {
-			throw new ResponseException("utils.separador.diretorio.nao.permitido");
-		}
-
-		String fileName = generateCode().substring(0, 8) + "-" + file.getOriginalFilename();
-
-		if (file.isEmpty()) {
-			throw new ResponseException("utils.arquivo.especifico.vazio", name);
-		}
+		validar(name, file);
+		String fileName = processFileName(name, file);
 
 		try {
 			new File(path).mkdir();
@@ -109,7 +102,39 @@ public class FileUtils {
 		return fileName;
 
 	}
-	
+
+	private static String processFileName(String fileName, MultipartFile file) {
+		if (fileName == null || fileName.isEmpty()) {
+			return generateFileName(file.getOriginalFilename());
+		}
+		fileName = generateFileName(fileName);
+		String type = getFileType(file);
+		if( !fileName.contains(type) ) {
+			fileName += type;
+		}
+		return fileName;
+	}
+
+	private static String generateFileName(String name) {
+		return generateCode().substring(0, 8) + "-" + name;
+	}
+
+	private static void validar(String name, MultipartFile file) {
+		if (name.contains("/")) {
+			throw new ResponseException("utils.separador.diretorio.nao.permitido");
+		}
+
+		if (file.isEmpty()) {
+			throw new ResponseException("utils.arquivo.especifico.vazio", name);
+		}
+	}
+
+	private static String getFileType(MultipartFile file) {
+		String multipartFileName = file.getOriginalFilename();
+		String type = multipartFileName.substring( multipartFileName.indexOf("."), multipartFileName.length());
+		return type;
+	}
+
 	public static boolean isImagemValida(byte[] bytes) {
 		boolean valido = true;
 		try {
@@ -190,5 +215,5 @@ public class FileUtils {
 			}
 		}
 	}
-	
+
 }
