@@ -219,5 +219,5 @@ public abstract class GenericBusiness <Gbean extends SimpleGenericBean, DAO exte
         }
 		
 	}
-	
+
 }
