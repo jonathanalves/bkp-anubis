@@ -16,9 +16,9 @@ public class EnumUtils {
 	@Cacheable
 	public static <T extends Enum<T>> Object listEnum(Class<T> clazz){
 		return EnumSet.allOf(clazz).stream().map((obj) -> {
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("id", obj.name());
-			map.put("nome", translateEnum(obj));
+			HashMap<String, String> map = new HashMap<>();
+            map.put("id", obj.name());
+            map.put("nome", translateEnum(obj));
 			return map;
 		}).collect(Collectors.toList());
 	}
