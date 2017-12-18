@@ -21,7 +21,7 @@ import anubis.utils.DateUtils;
 @Service("auditoriaBusiness")
 public class AuditoriaBusiness extends GenericBusiness<AuditoriaBean, AuditoriaDAO> {
 	
-	public void inserirAuditoria(String operacao, Object antigo, Object novo, Long objetoId, Long usuarioId, String tipo) throws ResponseException, SQLException, JsonGenerationException, JsonMappingException, IOException{
+	public void inserirAuditoria(String operacao, Object antigo, Object novo, Long objetoId, Long usuarioId, String tipo) throws ResponseException, SQLException {
 		AuditoriaBean auditoria = new AuditoriaBean();
 		auditoria.setObjetoId(objetoId);
 		auditoria.setUsuarioId(usuarioId);
@@ -29,18 +29,13 @@ public class AuditoriaBusiness extends GenericBusiness<AuditoriaBean, AuditoriaD
 		auditoria.setDataAcao(DateUtils.getCalendar());
 		auditoria.setObjetoTipo(tipo);
 		
-		ObjectMapper mapper = new ObjectMapper();
-		if(antigo!=null){
-			auditoria.setAntigo(mapper.writeValueAsString(antigo));
-		}
-		if(novo!=null){
-			auditoria.setNovo(mapper.writeValueAsString(novo));
-		}
-		
+        auditoria.setAntigo(antigo);
+        auditoria.setNovo(novo);
+
 		dao.persist(auditoria);
 	}
 	
-	public List<AuditoriaDTO> getAuditoria(String identificador, Long id) throws JsonParseException, JsonMappingException, IOException{
+	public List<AuditoriaDTO> getAuditoria(String identificador, Long id) {
 		if(id == null) {
 			throw new ResponseException("business.auditoria.informe.id");
 		}
@@ -61,14 +56,12 @@ public class AuditoriaBusiness extends GenericBusiness<AuditoriaBean, AuditoriaD
 			
 			dto.setUsuarioId(auditoria.getUsuarioId());
 			
-			ObjectMapper mapper = new ObjectMapper();
-				
 			if(auditoria.getAntigo() != null){
-				dto.setAntigo(mapper.readValue(auditoria.getAntigo(), Object.class));
+				dto.setAntigo(auditoria.getAntigo());
 			}
 
 			if(auditoria.getNovo() != null){
-				dto.setNovo(mapper.readValue(auditoria.getNovo(), Object.class));
+				dto.setNovo(auditoria.getNovo());
 			}
 			
 			retorno.add(dto);

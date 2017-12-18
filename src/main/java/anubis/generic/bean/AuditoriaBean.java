@@ -1,12 +1,15 @@
 package anubis.generic.bean;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
@@ -26,7 +29,7 @@ import lombok.Setter;
 @Setter
 @Entity(name = "Auditoria")
 @BeanProperties(slug = "auditoria", label = "bean.auditoria", gender = EnumGender.FEMALE, dtoClass = AuditoriaDTO.class)
-@TypeDefs( {@TypeDef( name= "StringJsonObject", typeClass = StringJsonUserType.class)})
+@TypeDefs({@TypeDef(name = "json", typeClass = JsonStringType.class),@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)})
 public class AuditoriaBean extends SimpleGenericBean {
 
 	private static final long serialVersionUID = 6342644424394334479L;
@@ -43,12 +46,12 @@ public class AuditoriaBean extends SimpleGenericBean {
 	private Calendar dataAcao;
 
 	@Column(name = "antigo", columnDefinition = "json")
-	@Type(type = "StringJsonObject")
-	private String antigo;
+    @Type(type = "jsonb")
+	private Object antigo;
 	
 	@Column(name = "novo", columnDefinition = "json")
-	@Type(type = "StringJsonObject")
-	private String novo;
+    @Type(type = "jsonb")
+	private Object novo;
 	
 	@Column(name = "objeto_id")
 	private Long objetoId;
@@ -114,12 +117,9 @@ public class AuditoriaBean extends SimpleGenericBean {
 		} else if (!operacao.equals(other.operacao))
 			return false;
 		if (usuarioId == null) {
-			if (other.usuarioId != null)
-				return false;
-		} else if (!usuarioId.equals(other.usuarioId))
-			return false;
-		return true;
-	}
+            return other.usuarioId == null;
+		} else return usuarioId.equals(other.usuarioId);
+    }
 
 	@Override
 	public String toString() {
