@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class RandomGenerator {
 
-    private static final String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
     public static String generateRandom(int length) {
         if (length <= 0) {
