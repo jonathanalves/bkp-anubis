@@ -104,5 +104,5 @@ public abstract class InstanceDAO<T> {
 			throw new SQLException(e.getMessage(), e);
 		}
 	}
-	
+
 }
