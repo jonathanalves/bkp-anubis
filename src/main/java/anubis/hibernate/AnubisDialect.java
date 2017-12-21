@@ -1,9 +1,9 @@
 package anubis.hibernate;
 
-import java.sql.Types;
-
 import org.hibernate.dialect.PostgreSQL94Dialect;
 import org.hibernate.type.StandardBasicTypes;
+
+import java.sql.Types;
 
 public class AnubisDialect extends PostgreSQL94Dialect {
 

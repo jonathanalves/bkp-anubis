@@ -1,9 +1,9 @@
 package anubis.backup.database;
 
-import java.util.Calendar;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Calendar;
 
 @Getter
 @Setter

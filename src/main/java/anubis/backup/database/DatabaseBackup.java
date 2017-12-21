@@ -1,5 +1,10 @@
 package anubis.backup.database;
 
+import anubis.backup.dropbox.DropBoxSendFiles;
+import anubis.response.ResponseException;
+import anubis.utils.DateUtils;
+import anubis.utils.FileUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,11 +12,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-import anubis.backup.dropbox.DropBoxSendFiles;
-import anubis.response.ResponseException;
-import anubis.utils.DateUtils;
-import anubis.utils.FileUtils;
 
 public class DatabaseBackup {
 

@@ -1,12 +1,12 @@
 package anubis.generic.dto;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.ParameterizedType;
-
 import anubis.generic.bean.SimpleGenericBean;
 import anubis.generic.interfaces.DTO;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
 
 @Getter
 @Setter

@@ -1,14 +1,13 @@
 package anubis.generic.security;
 
+import anubis.generic.business.LoginBusiness;
+import anubis.response.ResponseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import anubis.generic.business.LoginBusiness;
-import anubis.response.ResponseException;
 
 /**
  * @author Actus Description: Classe responsável pela autenticação no sistema

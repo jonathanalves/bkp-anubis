@@ -1,20 +1,5 @@
 package anubis.generic.test;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
-import org.springframework.test.web.servlet.MvcResult;
-
-import com.google.gson.Gson;
-import com.google.gson.internal.LinkedTreeMap;
-
 import anubis.MessageSystem;
 import anubis.annotation.BeanProperties;
 import anubis.generic.bean.ConfigurationGenericBean;
@@ -23,6 +8,19 @@ import anubis.generic.dao.GenericDAO;
 import anubis.generic.dto.SimpleGenericDTO;
 import anubis.response.Response;
 import anubis.utils.test.EnumStatusResponseTest;
+import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
+import org.junit.Assert;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+import org.springframework.test.web.servlet.MvcResult;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component("simpleTestGeneric")
 public abstract class SimpleTestGeneric<Gbean extends SimpleGenericBean, Gdto extends SimpleGenericDTO<Gbean>, Gdao extends GenericDAO<Gbean>, Gen extends GeneratorGeneric<Gbean, Gdto>> extends TestGeneric<Gbean, Gdto, Gdao>{

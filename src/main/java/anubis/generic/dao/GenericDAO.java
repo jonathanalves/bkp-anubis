@@ -1,20 +1,18 @@
 package anubis.generic.dao;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
-
+import anubis.annotation.BeanProperties;
+import anubis.generic.bean.SimpleGenericBean;
+import anubis.generic.dto.QueryDataTablesDTO;
+import anubis.generic.dto.SimpleGenericDTO;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import anubis.annotation.BeanProperties;
-import anubis.generic.bean.SimpleGenericBean;
-import anubis.generic.dto.QueryDataTablesDTO;
-import anubis.generic.dto.SimpleGenericDTO;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import java.util.List;
+import java.util.Map;
 
 public class GenericDAO <T extends SimpleGenericBean> extends InstanceDAO<T> {
 

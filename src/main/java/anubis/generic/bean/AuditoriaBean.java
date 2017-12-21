@@ -1,25 +1,21 @@
 package anubis.generic.bean;
 
-import java.util.Calendar;
-import java.util.HashMap;
+import anubis.annotation.BeanProperties;
+import anubis.enumeration.system.EnumGender;
+import anubis.generic.dto.AuditoriaDTO;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
-import com.vladmihalcea.hibernate.type.json.JsonStringType;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
-
-import anubis.annotation.BeanProperties;
-import anubis.enumeration.system.EnumGender;
-import anubis.generic.dto.AuditoriaDTO;
-import anubis.hibernate.StringJsonUserType;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.Calendar;
 
 /**
  * @author Actus 

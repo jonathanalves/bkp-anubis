@@ -1,13 +1,12 @@
 package anubis.backup.ftp;
 
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-
+import anubis.response.ResponseException;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 import org.apache.commons.net.ftp.FTPSClient;
 
-import anubis.response.ResponseException;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 public abstract class FtpConnection {
 

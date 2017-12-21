@@ -1,14 +1,13 @@
 package anubis.utils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
+import anubis.generic.dto.PeriodoDTO;
+import anubis.response.ResponseException;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Component;
 
-import anubis.generic.dto.PeriodoDTO;
-import anubis.response.ResponseException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 @Component("dateUtils")
 public class DateUtils {
@@ -46,11 +45,8 @@ public class DateUtils {
 	public static Boolean isHoje(Calendar date) {
 		if (date != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			if( sdf.format(date.getTime()).equals( sdf.format(DateUtils.getCalendar().getTime()) ) ){
-				return true;
-			}
-			return false;
-		}
+            return sdf.format(date.getTime()).equals(sdf.format(DateUtils.getCalendar().getTime()));
+        }
 		return false;
 	}
 	
@@ -351,11 +347,8 @@ public class DateUtils {
 	}
 
 	public static boolean isFinalDeSemana(Calendar data) {
-		if (data.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || data.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-			return true;
-		}
-		return false;
-	}
+        return data.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || data.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
+    }
 
 	public static Integer getSecondsFromTime(Calendar data) {
 		return (60 * 60 * data.get(Calendar.HOUR_OF_DAY)) + (60 * data.get(Calendar.MINUTE)) + data.get(Calendar.SECOND);
@@ -369,11 +362,11 @@ public class DateUtils {
 	}
 	
 	public static boolean validarAno(Integer ano) {
-		return ano <= 2000 ? false : true;
+		return ano > 2000;
 	}
 
 	public static boolean validarMes(Integer mes) {
-		return mes < 1 || mes > 12 ? false : true;
+		return mes >= 1 && mes <= 12;
 	}
 
 	public static void validarMesAno(Integer mes, Integer ano) throws ResponseException {

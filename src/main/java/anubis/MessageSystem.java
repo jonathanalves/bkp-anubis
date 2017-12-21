@@ -1,12 +1,12 @@
 package anubis;
 
-import java.util.Locale;
-
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
+
+import java.util.Locale;
 
 @Configuration("messageSystem")
 public class MessageSystem {

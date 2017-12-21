@@ -1,11 +1,11 @@
 package anubis.generic.bean;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 
 @Getter
 @Setter
@@ -55,11 +55,8 @@ public abstract class ConfigurationGenericBean extends SimpleGenericBean {
 		} else if (!isAtivo.equals(other.isAtivo))
 			return false;
 		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		return true;
-	}
+            return other.nome == null;
+		} else return nome.equals(other.nome);
+    }
 	
 }

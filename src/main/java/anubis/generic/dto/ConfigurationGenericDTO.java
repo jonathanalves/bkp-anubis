@@ -1,17 +1,16 @@
 package anubis.generic.dto;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.ParameterizedType;
-
-import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import anubis.annotation.NotNullAndNotEmpty;
 import anubis.generic.bean.ConfigurationGenericBean;
 import anubis.generic.bean.SimpleGenericBean;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
 
 @Getter
 @Setter
@@ -34,7 +33,7 @@ public abstract class ConfigurationGenericDTO<T extends ConfigurationGenericBean
 	public ConfigurationGenericDTO(T bean) {
 		super(bean);
 		this.nome = bean.getNome();
-		this.isAtivo = bean.getIsAtivo()!= null ? bean.getIsAtivo() : null;
+		this.isAtivo = bean.getIsAtivo();
 	}
 	
 	public T converter(T bean) {

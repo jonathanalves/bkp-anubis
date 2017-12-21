@@ -1,12 +1,12 @@
 package anubis.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Component("collectionUtils")
 public class CollectionUtils {

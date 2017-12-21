@@ -1,17 +1,16 @@
 package anubis.generic.bean;
 
+import anubis.generic.interfaces.Bean;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
-
-import anubis.generic.interfaces.Bean;
-import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Setter
@@ -65,12 +64,9 @@ public abstract class SimpleGenericBean implements Bean, Cloneable {
 			return false;
 		SimpleGenericBean other = (SimpleGenericBean) obj;
 		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
+            return other.id == null;
+		} else return id.equals(other.id);
+    }
 
 	@Override
 	public String toString() {

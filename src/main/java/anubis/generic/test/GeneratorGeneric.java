@@ -1,12 +1,11 @@
 package anubis.generic.test;
 
-import java.lang.reflect.ParameterizedType;
-
-import org.springframework.stereotype.Component;
-
 import anubis.generic.bean.SimpleGenericBean;
 import anubis.generic.dto.SimpleGenericDTO;
 import anubis.utils.DateUtils;
+import org.springframework.stereotype.Component;
+
+import java.lang.reflect.ParameterizedType;
 
 @Component("generatorGeneric")
 public abstract class GeneratorGeneric<Gbean extends SimpleGenericBean, Gdto extends SimpleGenericDTO<Gbean>> extends GeneratorValues {

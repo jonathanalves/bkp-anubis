@@ -1,34 +1,5 @@
 package anubis.generic.controller;
 
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.ParameterizedType;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.validation.Valid;
-
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
 import anubis.annotation.AuditoriaOperations;
 import anubis.annotation.BeanConverter;
 import anubis.annotation.BeanProperties;
@@ -46,6 +17,33 @@ import anubis.generic.security.AnubisUserSecurity;
 import anubis.response.Response;
 import anubis.response.ResponseException;
 import anubis.validator.SqlInjectionValidator;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @RestController("genericController")
 public abstract class GenericController<Gbean extends SimpleGenericBean, Gdto extends SimpleGenericDTO<Gbean>, Gdao extends GenericDAO<Gbean>, Gbus extends GenericBusiness<Gbean, Gdao>> {
@@ -109,7 +107,7 @@ public abstract class GenericController<Gbean extends SimpleGenericBean, Gdto ex
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	protected void saveAuditoriaInsert(SimpleGenericDTO dto) throws JsonGenerationException, JsonMappingException, ResponseException, SQLException, IOException {
+	protected void saveAuditoriaInsert(SimpleGenericDTO dto) throws ResponseException {
 		try {
 			Class classe = dto.getClass();
 			AuditoriaOperations operation = (AuditoriaOperations) classe.getAnnotation(AuditoriaOperations.class);
@@ -282,7 +280,7 @@ public abstract class GenericController<Gbean extends SimpleGenericBean, Gdto ex
 		}
 	}
 	
-	public void callBeanConverter(Field field, SimpleGenericDTO<? extends SimpleGenericBean> dto, SimpleGenericBean bean, Class<?> classeBean, Class<?> classeDTO) throws NoSuchFieldException, SecurityException {
+	public void callBeanConverter(Field field, SimpleGenericDTO<? extends SimpleGenericBean> dto, SimpleGenericBean bean, Class<?> classeBean, Class<?> classeDTO) throws SecurityException {
 		Field fieldBean = null;
 		try {
 			field.setAccessible(true);
@@ -403,7 +401,7 @@ public abstract class GenericController<Gbean extends SimpleGenericBean, Gdto ex
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/skeleton", method = RequestMethod.GET)
 	@Transactional(readOnly = true)
-	public Response getSkeleton() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+	public Response getSkeleton() throws InstantiationException, IllegalAccessException, IllegalArgumentException, SecurityException {
 		ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
 		Class<Gdto> entityClass = (Class<Gdto>) genericSuperclass.getActualTypeArguments()[1];
 		SimpleGenericDTO dto = entityClass.newInstance();

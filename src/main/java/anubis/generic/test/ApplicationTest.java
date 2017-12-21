@@ -1,12 +1,12 @@
 package anubis.generic.test;
 
-import static org.hamcrest.CoreMatchers.containsString;
-
-import java.nio.charset.Charset;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-
+import anubis.enumeration.EnumStatusRetorno;
+import anubis.generic.business.LoginBusiness;
+import anubis.generic.security.AnubisUserSecurity;
+import anubis.response.Response;
+import anubis.utils.test.ControllerIntegrationTestEnum;
+import anubis.utils.test.EnumStatusResponseTest;
+import com.google.gson.Gson;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -29,14 +29,12 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.google.gson.Gson;
+import java.nio.charset.Charset;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
-import anubis.enumeration.EnumStatusRetorno;
-import anubis.generic.business.LoginBusiness;
-import anubis.generic.security.AnubisUserSecurity;
-import anubis.response.Response;
-import anubis.utils.test.ControllerIntegrationTestEnum;
-import anubis.utils.test.EnumStatusResponseTest;
+import static org.hamcrest.CoreMatchers.containsString;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest("applicationTest")
@@ -106,7 +104,7 @@ public abstract class ApplicationTest {
     	return mockMvc;
     }
     
-	protected void login(String login) throws Exception {
+	protected void login(String login) {
 		AnubisUserSecurity anubisUserSecurity = loginBusiness.login(login);
 		SecurityContextHolder.getContext().setAuthentication(new UserSecurityTest(anubisUserSecurity));
 	}

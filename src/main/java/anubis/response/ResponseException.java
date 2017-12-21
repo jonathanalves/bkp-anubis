@@ -1,13 +1,12 @@
 package anubis.response;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import anubis.MessageSystem;
+import anubis.enumeration.EnumStatusRetorno;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import anubis.MessageSystem;
-import anubis.enumeration.EnumStatusRetorno;
+import java.util.ArrayList;
+import java.util.List;
 
 @ResponseStatus(value=HttpStatus.OK)
 public class ResponseException extends RuntimeException  {

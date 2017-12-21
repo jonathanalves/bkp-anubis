@@ -1,12 +1,12 @@
 package anubis.generic.dto;
 
-import java.io.Serializable;
-import java.util.Calendar;
-
 import anubis.response.ResponseException;
 import anubis.utils.DateUtils;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serializable;
+import java.util.Calendar;
 
 @Getter
 @Setter
@@ -71,12 +71,9 @@ public class PeriodoDTO implements Serializable {
     public boolean isMonth(){
     	
     	PeriodoDTO mes = new PeriodoDTO(this.getInicio());
-    	
-    	if(mes.getInicio().equals(this.getInicio()) && mes.getFim().equals(this.getFim())){
-    		return true;
-    	}
-    	
-    	return false;
+
+        return mes.getInicio().equals(this.getInicio()) && mes.getFim().equals(this.getFim());
+
     }
     
     public void validarPeriodo(int dias){

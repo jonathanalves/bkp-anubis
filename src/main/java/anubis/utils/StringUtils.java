@@ -1,18 +1,14 @@
 package anubis.utils;
 
+import javax.swing.text.MaskFormatter;
 import java.text.ParseException;
 import java.util.List;
-
-import javax.swing.text.MaskFormatter;
 
 public class StringUtils {
 
 	public static boolean isEmpty(String value) {
-		if (value != null && !value.trim().isEmpty()) {
-			return false;
-		}
-		return true;
-	}
+        return value == null || value.trim().isEmpty();
+    }
 
 	public static String[] split(String termo, int valor) {
 		int loop = Math.round(termo.length() / valor);

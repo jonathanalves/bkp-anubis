@@ -1,13 +1,12 @@
 package anubis.utils;
 
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.stream.Collectors;
-
+import anubis.MessageSystem;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
-import anubis.MessageSystem;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.stream.Collectors;
 
 @Component("enumUtils")
 public class EnumUtils {

@@ -1,12 +1,10 @@
 package anubis.generic.dao;
 
-import java.util.List;
-
-import javax.persistence.Query;
-
+import anubis.generic.bean.AuditoriaBean;
 import org.springframework.stereotype.Repository;
 
-import anubis.generic.bean.AuditoriaBean;
+import javax.persistence.Query;
+import java.util.List;
 
 @Repository("auditoriaDAO")
 public class AuditoriaDAO extends GenericDAO<AuditoriaBean> {

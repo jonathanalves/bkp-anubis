@@ -1,20 +1,19 @@
 package anubis.generic.dao;
 
-import java.lang.reflect.ParameterizedType;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-
 import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.hibernate.transform.Transformers;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.lang.reflect.ParameterizedType;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
 
 @Repository("instanceDAO")
 public abstract class InstanceDAO<T> {

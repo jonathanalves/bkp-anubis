@@ -1,12 +1,13 @@
 package anubis.generic.test;
 
-import static org.hamcrest.CoreMatchers.containsString;
-
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
-import java.util.List;
-
+import anubis.annotation.BeanProperties;
+import anubis.generic.bean.SimpleGenericBean;
+import anubis.generic.dao.GenericDAO;
+import anubis.generic.dto.SimpleGenericDTO;
+import anubis.response.Response;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.internal.LinkedTreeMap;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -19,15 +20,12 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.internal.LinkedTreeMap;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.List;
 
-import anubis.annotation.BeanProperties;
-import anubis.generic.bean.SimpleGenericBean;
-import anubis.generic.dao.GenericDAO;
-import anubis.generic.dto.SimpleGenericDTO;
-import anubis.response.Response;
+import static org.hamcrest.CoreMatchers.containsString;
 
 @Component("testGeneric")
 public abstract class TestGeneric<Gbean extends SimpleGenericBean, Gdto extends SimpleGenericDTO<Gbean>, Gdao extends GenericDAO<Gbean>> extends ApplicationTest {
@@ -100,7 +98,7 @@ public abstract class TestGeneric<Gbean extends SimpleGenericBean, Gdto extends 
 		Response response = new Gson().fromJson(result.getResponse().getContentAsString(), Response.class);
 		Class<Gdto> dtoClass = (Class<Gdto>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
 		
-		return new Gson().fromJson(new Gson().toJson(((LinkedTreeMap<String, Object>) response.getResponse())), dtoClass);
+		return new Gson().fromJson(new Gson().toJson(response.getResponse()), dtoClass);
 	}
 	
 	

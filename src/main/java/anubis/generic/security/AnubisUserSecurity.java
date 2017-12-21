@@ -1,11 +1,10 @@
 package anubis.generic.security;
 
-import java.util.Collection;
-
+import anubis.generic.bean.SimpleGenericBean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-import anubis.generic.bean.SimpleGenericBean;
+import java.util.Collection;
 
 public abstract class AnubisUserSecurity extends User {
 

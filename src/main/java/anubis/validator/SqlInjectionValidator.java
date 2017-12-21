@@ -1,10 +1,9 @@
 package anubis.validator;
 
+import anubis.generic.dto.QueryDataTablesDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
-import anubis.generic.dto.QueryDataTablesDTO;
 
 @Component("sqlInjectionValidator")
 public class SqlInjectionValidator implements Validator {

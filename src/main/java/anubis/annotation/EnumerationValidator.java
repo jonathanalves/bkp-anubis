@@ -1,10 +1,9 @@
 package anubis.annotation;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EnumerationValidator implements ConstraintValidator<EnumerationValid, String> {
 	
@@ -29,10 +28,7 @@ public class EnumerationValidator implements ConstraintValidator<EnumerationVali
 		if(value == null || value.isEmpty()) {
 			return true;
 		}
-		if(!valueList.contains(value.toUpperCase())) {
-			return false;
-	    }
-	    return true;
-	}
+        return valueList.contains(value.toUpperCase());
+    }
 
 }

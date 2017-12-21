@@ -1,20 +1,19 @@
 package anubis.generic.test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import anubis.generic.bean.ConfigurationGenericBean;
 import anubis.generic.dao.GenericDAO;
 import anubis.generic.dto.ConfigurationGenericDTO;
 import anubis.utils.test.ControllerIntegrationTestEnum;
 import anubis.utils.test.EnumStatusResponseTest;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Component("configurationTestGeneric")
 public abstract class ConfigurationTestGeneric<Gbean extends ConfigurationGenericBean, Gdto extends ConfigurationGenericDTO<Gbean>, Gdao extends GenericDAO<Gbean>, Gen extends GeneratorGeneric<Gbean, Gdto>> extends SimpleTestGeneric<Gbean, Gdto, Gdao, Gen> {

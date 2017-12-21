@@ -1,14 +1,5 @@
 package anubis.generic.business;
 
-import java.lang.reflect.ParameterizedType;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-
 import anubis.MessageSystem;
 import anubis.annotation.BeanProperties;
 import anubis.generic.bean.ConfigurationGenericBean;
@@ -17,6 +8,14 @@ import anubis.generic.dao.GenericDAO;
 import anubis.generic.dto.QueryDataTablesDTO;
 import anubis.generic.dto.SimpleGenericDTO;
 import anubis.response.ResponseException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+
+import java.lang.reflect.ParameterizedType;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public abstract class GenericBusiness <Gbean extends SimpleGenericBean, DAO extends GenericDAO<Gbean>> {
 
@@ -117,7 +116,7 @@ public abstract class GenericBusiness <Gbean extends SimpleGenericBean, DAO exte
 		return t;
 	}
 	
-	public void afterEditSuccess(Gbean t, Gbean tOld) throws Exception {  }
+	public void afterEditSuccess(Gbean t, Gbean tOld) {  }
 	
 	
 	//##################################### REMOVE #####################################
@@ -126,7 +125,7 @@ public abstract class GenericBusiness <Gbean extends SimpleGenericBean, DAO exte
 		return true;
 	}
 	
-	public void beforeRemove(Gbean t) throws Exception {  }
+	public void beforeRemove(Gbean t) {  }
 	
 	public void remove(Gbean t) throws Exception {
 		try {
@@ -140,7 +139,7 @@ public abstract class GenericBusiness <Gbean extends SimpleGenericBean, DAO exte
 		}
 	}
 	
-	public void afterRemoveSuccess(Gbean t) throws Exception {  }
+	public void afterRemoveSuccess(Gbean t) {  }
 	
 	
 	//##################################### GETS AND LISTS #####################################
