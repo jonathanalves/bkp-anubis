@@ -272,9 +272,6 @@ public abstract class GenericController<Gbean extends SimpleGenericBean, Gdto ex
 					callListBeanConverter(field, dto, bean);
 				}
 			}
-		} 
-		catch (NoSuchFieldException e) {
-			throw new ResponseException("Convert DTO to Bean error: No such field: " + fieldName);
 		} catch (ResponseException e) {
 			throw new ResponseException(e.getMessage() + ":" + fieldName);
 		}
@@ -383,7 +380,7 @@ public abstract class GenericController<Gbean extends SimpleGenericBean, Gdto ex
 		}
 	}
 	
-	private void callBeanConverter(SimpleGenericDTO<? extends SimpleGenericBean> dto, SimpleGenericBean bean) throws NoSuchFieldException, SecurityException {
+	private void callBeanConverter(SimpleGenericDTO<? extends SimpleGenericBean> dto, SimpleGenericBean bean) throws SecurityException {
 		String fieldName = null;
 		try {
 			Class<?> classeDTO = dto.getClass();
