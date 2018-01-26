@@ -204,7 +204,7 @@ public abstract class GenericBusiness <Gbean extends SimpleGenericBean, DAO exte
                 if(bean.getId() == null) {
                 	insert(bean);
                 } else {
-                	edit(bean, null);
+                	edit(bean, bean);
                     if(oldList.contains(bean)) {
                     	oldList.remove(bean);
                     }

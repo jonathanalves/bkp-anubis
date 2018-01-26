@@ -448,4 +448,37 @@ public class DateUtils {
 		return calendar;
 	}
 	
+	public static String getMesAtualPortugues() {
+		Calendar calendar = Calendar.getInstance();
+		switch (calendar.get(Calendar.MONTH)) {
+			case 0:	return "Janeiro";
+			case 1:	return "Fevereiro";
+			case 2:	return "Março";
+			case 3: return "Abril";
+			case 4: return "Maio";
+			case 5: return "Junho";
+			case 6: return "Julho";
+			case 7: return "Agosto";
+			case 8: return "Setembro";
+			case 9: return "Outubro";
+			case 10: return "Novembro";
+			case 12: return "Dezembro";
+			default: return "";
+		}
+	}
+	
+	public static String getDiaSemanaAtual() {
+		Calendar calendar = Calendar.getInstance();
+		switch (calendar.get(Calendar.DAY_OF_WEEK)) {
+			case 1: return "domingo";
+			case 2: return "segunda-feira";
+			case 3: return "terça-feira";
+			case 4: return "quarta-feira";
+			case 5: return "quinta-feira";
+			case 6: return "sexta-feira";
+			case 7: return "sábado";
+			default: return "";
+		}
+	}
+	
 }
