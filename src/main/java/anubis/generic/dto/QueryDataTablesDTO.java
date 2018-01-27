@@ -4,10 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -82,6 +84,16 @@ public class QueryDataTablesDTO implements Serializable {
 			String valor = this.getDados().get(index).toString();
 			return Boolean.valueOf(valor);
 		}
-		return null;
+		return false;
 	}
+
+    public List<Long> getIds(String index){
+        ArrayList<Integer> list = (ArrayList<Integer>) this.getDados().get(index);
+        if(list != null && !list.isEmpty()){
+            return list.stream().mapToLong(i -> i).boxed().collect(Collectors.toList());
+        }
+        return new ArrayList<>();
+    }
+
+
 }
