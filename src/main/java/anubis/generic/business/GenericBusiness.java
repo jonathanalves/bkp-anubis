@@ -199,24 +199,33 @@ public abstract class GenericBusiness <Gbean extends SimpleGenericBean, DAO exte
 	//##################################### UPDATE PARENT LIST #####################################
 	public void updateParentList(Collection<Gbean> oldList, Collection<Gbean> newList) throws Exception {
 
+	    HashMap<Long, Gbean> olds = new HashMap<>();
+	    if(oldList != null){
+            oldList.stream().forEach(e -> olds.put(e.getId(), e));
+        }
+
         if(newList != null) {
             for(Gbean bean : newList) {
                 if(bean.getId() == null) {
                 	insert(bean);
                 } else {
-                	edit(bean, bean);
-                    if(oldList.contains(bean)) {
-                    	oldList.remove(bean);
+                    if(olds.containsKey(bean.getId())) {
+                        edit(bean, olds.get(bean.getId()));
+                        olds.remove(bean.getId());
+                    }else{
+                        edit(bean, bean);
                     }
                 }
             }
         }
-        
-        for(Gbean valorAdicionalOld : oldList) {
-        	Gbean tmp = dao.findById(valorAdicionalOld.getId());
-        	remove(tmp);
+
+        for(Long key : olds.keySet()){
+            Gbean tmp = dao.findById(key);
+            if(tmp != null){
+                remove(tmp);
+            }
         }
-		
+
 	}
 
 }
