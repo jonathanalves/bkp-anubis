@@ -95,5 +95,4 @@ public class QueryDataTablesDTO implements Serializable {
         return new ArrayList<>();
     }
 
-
 }
