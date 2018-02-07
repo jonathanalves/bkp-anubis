@@ -142,7 +142,7 @@ public class GenericDAO <T extends SimpleGenericBean> extends InstanceDAO<T> {
 		try{
 			StringBuilder hql = new StringBuilder();
 			hql.append( getHqlDtoBase() );
-			hql.append("WHERE e.id = :id ");
+			hql.append("WHERE " + getWhere());
 			Query query = getEntityManager().createQuery(hql.toString());
 			query.setParameter("id", id);		
 			Map<String, Object> obj = (Map<String, Object>) query.getSingleResult();
@@ -150,6 +150,10 @@ public class GenericDAO <T extends SimpleGenericBean> extends InstanceDAO<T> {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	public String getWhere(){
+		return "e.id = :id ";
 	}
 
 	@SuppressWarnings({ "unchecked" })
