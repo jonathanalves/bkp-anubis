@@ -2,16 +2,17 @@ package anubis.enumeration.system;
 
 public enum EnumGender {
 
-	MALE(true, "masculino"),
-	FEMALE(false, "feminino");
+	MALE(true, "masculino", "crud.generic.nao.encontrado.masculino"),
+	FEMALE(false, "feminino", "crud.generic.nao.encontrado.feminino");
 	
 	private boolean valueBoolean;
 	private String valueString;
+	private String messageKey;
 	
-	
-	private EnumGender(boolean valueBoolean, String valueString) {
+	private EnumGender(boolean valueBoolean, String valueString, String messageKey) {
 		this.valueBoolean = valueBoolean;
 		this.valueString = valueString;
+		this.messageKey = messageKey;
 	}
 
 	
@@ -26,5 +27,8 @@ public enum EnumGender {
 	public String getValueString() {
 		return valueString;
 	}
-	
+
+	public String getMessageKey() {
+		return messageKey;
+	}
 }

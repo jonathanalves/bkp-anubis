@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 public class ReflectionUtils {
 
     public static String getLabelBean(Class<? extends SimpleGenericBean> classBean) {
-        return classBean.getAnnotation(BeanProperties.class).label();
+        return getBeanProperties(classBean).label();
     }
 
     public static Field getFieldFromType(Class<?> clazz, Class<?> fieldFromType) {
@@ -20,5 +20,13 @@ public class ReflectionUtils {
             }
         }
         throw new RuntimeException("Não existe atributo do tipo " + fieldFromType.getName() + " na classe " + clazz.getName());
+    }
+
+    public static String getMessageGender(Class<? extends SimpleGenericBean> classBean) {
+        return getBeanProperties(classBean).gender().getMessageKey();
+    }
+
+    public static BeanProperties getBeanProperties(Class<? extends SimpleGenericBean> classBean) {
+        return classBean.getAnnotation(BeanProperties.class);
     }
 }
