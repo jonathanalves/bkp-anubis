@@ -8,14 +8,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.math.BigInteger;
 import java.net.URLConnection;
 import java.nio.file.Files;
@@ -212,6 +205,25 @@ public class FileUtils {
 			} catch (IOException e) {
 			}
 		}
+	}
+
+	public static File escreverConteudoArquivo(File file, String conteudo){
+		FileWriter fw = null;
+		try {
+			fw = new FileWriter( file );
+			fw.write(conteudo);
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				fw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new ResponseException("utils.erro.escrever.conteudo.arquivo");
+			}
+		}
+		return file;
 	}
 
 }
