@@ -25,7 +25,18 @@ public class EnumUtils {
 	//FIXME validar e traduzir os enums no sistema
 	@Cacheable
 	public static <T extends Enum<T>> String translateEnum(T obj){
-		return MessageSystem.formatMessage("enum." + obj.getClass().getSimpleName().toLowerCase() + "." + obj.name().toLowerCase().replaceAll("_",  "."));
+		return MessageSystem.formatMessage("enum." + getClassName(obj.getClass()).toLowerCase() + "." + obj.name().toLowerCase().replaceAll("_",  "."));
+	}
+
+	public static String getClassName(Class c) {
+		String nomeClasse = c.getName();
+		int firstChar;
+		firstChar = nomeClasse.lastIndexOf ('.') + 1;
+		if ( firstChar > 0 ) {
+			nomeClasse = nomeClasse.substring ( firstChar );
+		}
+		nomeClasse = nomeClasse.replaceAll("\\$([0-9]*)", "");
+		return nomeClasse;
 	}
 	
 }
