@@ -208,20 +208,10 @@ public class FileUtils {
 	}
 
 	public static File escreverConteudoArquivo(File file, String conteudo){
-		FileWriter fw = null;
-		try {
-			fw = new FileWriter( file );
+		try (FileWriter fw = new FileWriter( file )) {
 			fw.write(conteudo);
-			fw.close();
 		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				fw.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-				throw new ResponseException("utils.erro.escrever.conteudo.arquivo");
-			}
+			throw new ResponseException("utils.erro.escrever.conteudo.arquivo");
 		}
 		return file;
 	}
