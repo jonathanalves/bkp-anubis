@@ -144,67 +144,51 @@ public class FileUtils {
 	}
 	
 	public static void getFile(HttpServletResponse response, String path, String nameFile, boolean forceDownload) {
-		InputStream in = null;
-		ServletOutputStream out = null;
-		try  {
-			
-			File file = new File(path);
-			if(!file.exists()) {
-				throw new ResponseException("utils.arquivo.nao.encontrado");
-			}
-			
-			String name = ((nameFile!=null) ? nameFile : file.getName());
-			
-			in = new BufferedInputStream(new FileInputStream(file));
-			
-			if(forceDownload) {
-				response.setHeader("Content-Disposition", "attachment; filename=" + name );
-			}
-			
-			out = response.getOutputStream();
-			int c;
-			while ((c = in.read()) != -1) {
-				out.write(c);
-			}
-			response.flushBuffer();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new ResponseException("utils.arquivo.nao.encontrado");
-		} finally {
-			try {
-				if (in != null) {
-					in.close();
-				}
-			} catch (IOException e) {
-				throw new ResponseException("utils.erro.fechar.arquivo");
-			}
-		}
+
+        File file = new File(path);
+        if(!file.exists()) {
+            throw new ResponseException("utils.arquivo.nao.encontrado");
+        }
+
+        String name = ((nameFile!=null) ? nameFile : file.getName());
+
+        try(InputStream in = new BufferedInputStream( new FileInputStream(file) )){
+
+            if(forceDownload) {
+                response.setHeader("Content-Disposition", "attachment; filename=" + name );
+            }
+
+            int c;
+            while ((c = in.read()) != -1) {
+                response.getOutputStream().write(c);
+            }
+            response.flushBuffer();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ResponseException("utils.arquivo.nao.encontrado");
+        }
+
 	}
 	
 	public static void getFile(HttpServletResponse response, byte[] bytes, String fileName) {
-		InputStream in = null;
-		ServletOutputStream out = null;
-		try {
-			in = new BufferedInputStream(new ByteArrayInputStream(bytes));
+
+		try( InputStream in = new BufferedInputStream(new ByteArrayInputStream(bytes)) ) {
+
 			response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
 			String mimeType = URLConnection.guessContentTypeFromStream(in);
 			response.setContentType(mimeType);
-			out = response.getOutputStream();
+
 			int c;
 			while ((c = in.read()) != -1) {
-				out.write(c);
+                response.getOutputStream().write(c);
 			}
 			response.flushBuffer();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (in != null) {
-					in.close();
-				}
-			} catch (IOException e) {
-			}
-		}
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ResponseException("utils.arquivo.nao.encontrado");
+        }
 	}
 
 	public static File escreverConteudoArquivo(File file, String conteudo){
