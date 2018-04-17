@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -63,14 +64,20 @@ public class QueryDataTablesDTO implements Serializable {
 			List<Object> mp = (List<Object>)this.getDados().get("whereCondition");
 		    for (Object dto : mp) {
 		        HashMap<String, Object> conditions = (HashMap<String, Object>) dto;
-		        where.append(" AND ").append(conditions.get("key").toString()).append(conditions.get("condition").toString()).append(conditions.get("value").toString());
+		        where.append(getValidation(conditions)).append(conditions.get("key").toString()).append(conditions.get("condition").toString()).append(conditions.get("value").toString());
 		    }
 		}
 		
 		return where.toString();
 		
 	}
-	
+
+	private String getValidation(HashMap<String, Object> conditions) {
+		return Optional.ofNullable(conditions.get("validation"))
+				.map(validation -> " " + validation + " ")
+				.orElse(" AND ");
+	}
+
 	public Long getNumber(String index){
 		if(this.getDados().get(index) != null){
 			String valor = this.getDados().get(index).toString();
