@@ -18,7 +18,6 @@ public class EnumUtils {
 			HashMap<String, String> map = new HashMap<>();
             map.put("id", obj.name());
             map.put("nome", translateEnum(obj));
-            System.out.println(translateEnum(obj));
 			return map;
 		}).collect(Collectors.toList());
 	}
