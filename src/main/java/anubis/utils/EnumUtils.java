@@ -25,7 +25,7 @@ public class EnumUtils {
 	//FIXME validar e traduzir os enums no sistema
 	@Cacheable
 	public static <T extends Enum<T>> String translateEnum(T obj){
-		return MessageSystem.formatMessage("enum." + getClassName(obj.getClass()).toLowerCase() + "." + obj.name().toLowerCase().replaceAll("_",  "."));
+		return MessageSystem.formatMessage("enum." + getClassName(obj.getClass()).replace("enum", "").toLowerCase() + "." + obj.name().toLowerCase().replaceAll("_",  "."));
 	}
 
 	public static String getClassName(Class c) {
