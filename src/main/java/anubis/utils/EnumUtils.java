@@ -18,6 +18,7 @@ public class EnumUtils {
 			HashMap<String, String> map = new HashMap<>();
             map.put("id", obj.name());
             map.put("nome", translateEnum(obj));
+            System.out.println(translateEnum(obj));
 			return map;
 		}).collect(Collectors.toList());
 	}
@@ -25,7 +26,7 @@ public class EnumUtils {
 	//FIXME validar e traduzir os enums no sistema
 	@Cacheable
 	public static <T extends Enum<T>> String translateEnum(T obj){
-		return MessageSystem.formatMessage("enum." + getClassName(obj.getClass()).replace("enum", "").toLowerCase() + "." + obj.name().toLowerCase().replaceAll("_",  "."));
+		return MessageSystem.formatMessage("enum." + getClassName(obj.getClass()).toLowerCase().replaceAll("enum", "") + "." + obj.name().toLowerCase().replaceAll("_",  "."));
 	}
 
 	public static String getClassName(Class c) {
