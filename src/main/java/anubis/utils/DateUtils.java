@@ -19,6 +19,17 @@ public class DateUtils {
 		}
 		return null;
 	}
+	
+	public static boolean isValidDate(String inDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss:ms");
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(inDate.trim());
+        } catch (ParseException pe) {
+            return false;
+        }
+        return true;
+    }
 
 	public static Calendar getHoraMinuto(String time) throws ResponseException {
 		try {
