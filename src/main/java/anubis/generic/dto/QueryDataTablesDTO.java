@@ -48,7 +48,6 @@ public class QueryDataTablesDTO implements Serializable {
 		        Map.Entry pair = (Map.Entry)it.next();
 		        where.append(" AND ").append(pair.getKey()).append(" = ").append(pair.getValue().toString());
 		    }
-		    
 		}
 
 		if(this.getDados().get("whereIn") != null){
