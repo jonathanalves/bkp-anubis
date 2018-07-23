@@ -6,6 +6,7 @@ import anubis.generic.dto.QueryDataTablesDTO;
 import anubis.generic.dto.SimpleGenericDTO;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
