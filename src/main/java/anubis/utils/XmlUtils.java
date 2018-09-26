@@ -15,7 +15,7 @@ public class XmlUtils {
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         return classe.cast(jaxbUnmarshaller.unmarshal(file));
     }
-	
+
 	@SuppressWarnings("unchecked")
 	public static <T> T convertXmlToObject(String xml, Class<T> classe) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(classe);
@@ -32,5 +32,5 @@ public class XmlUtils {
 		marshaller.marshal(obj, sw);
         return sw.toString();
 	}
-	
+
 }

@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.10.RELEASE</version>
+		<version>1.5.16.RELEASE</version>
 	</parent>
 
 	<dependencies>
@@ -72,52 +72,16 @@
 		  <artifactId>joda-time</artifactId>
 		</dependency>
 
-
-<!-- Verificar com os BOSSES de criar um anubis-test pra ter escopo so de test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-<!-- 			<scope>test</scope> -->
 		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-<!-- 			<scope>test</scope> -->
 		</dependency>
 
 	</dependencies>
-
-	<!-- <build> -->
-	<!-- <plugins> -->
-	<!-- <plugin> -->
-	<!-- <groupId>org.springframework.boot</groupId> -->
-	<!-- <artifactId>spring-boot-maven-plugin</artifactId> -->
-	<!-- PHILIPE VERIFICAR ISSO AQUI, PROVAVEL DE TE Q CRIAR POM MULTIMODULOS -->
-	<!-- <configuration> -->
-	<!-- <mainClass>br.com.sistemasactus.ApplicationManager</mainClass> -->
-	<!-- <layout>JAR</layout> -->
-	<!-- </configuration> -->
-	<!-- <executions> -->
-	<!-- <execution> -->
-	<!-- <goals> -->
-	<!-- <goal>repackage</goal> -->
-	<!-- </goals> -->
-	<!-- <configuration> -->
-	<!-- <filters> -->
-	<!-- <filter> -->
-	<!-- <artifact>*:*</artifact> -->
-	<!-- <excludes> -->
-	<!-- <exclude>META-INF/*.SF</exclude> -->
-	<!-- <exclude>META-INF/*.DSA</exclude> -->
-	<!-- <exclude>META-INF/*.RSA</exclude> -->
-	<!-- </excludes> -->
-	<!-- </filter> -->
-	<!-- </filters> -->
-	<!-- </configuration> -->
-	<!-- </execution> -->
-	<!-- </executions> -->
-	<!-- </plugin> -->
-	<!-- </plugins> -->
-	<!-- </build> -->
 
 </project>
