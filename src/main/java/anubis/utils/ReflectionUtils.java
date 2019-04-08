@@ -42,7 +42,6 @@ public class ReflectionUtils {
         Field[] fields = o.getClass().getDeclaredFields();
         for(Field field : fields) {
             if(!isCollection(getValue(field, o)) && !isPrimitiveType(field)) {
-                anyEmptyValue = anyEmptyValue(o);
                 break;
             }
 
