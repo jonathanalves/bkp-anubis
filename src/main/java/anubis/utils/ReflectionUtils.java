@@ -41,14 +41,16 @@ public class ReflectionUtils {
         boolean anyEmptyValue = false;
         Field[] fields = o.getClass().getDeclaredFields();
         for(Field field : fields) {
-            if(!isCollection(getValue(field, o)) && !isPrimitiveType(field)) {
-                anyEmptyValue = anyEmptyValue(o);
-                break;
-            }
+            if (getValue(field, o) != null) {
+                if (!isCollection(getValue(field, o)) && !isPrimitiveType(field)) {
+                    anyEmptyValue = anyEmptyValue(o);
+                    break;
+                }
 
-            if (isEmpty(field, o)) {
-                anyEmptyValue = true;
-                break;
+                if (isEmpty(field, o)) {
+                    anyEmptyValue = true;
+                    break;
+                }
             }
         }
 
