@@ -473,7 +473,7 @@ public class DateUtils {
 			case 8: return "Setembro";
 			case 9: return "Outubro";
 			case 10: return "Novembro";
-			case 12: return "Dezembro";
+			case 11: return "Dezembro";
 			default: return "";
 		}
 	}
