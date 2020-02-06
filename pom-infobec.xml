@@ -1,0 +1,217 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>anubis</groupId>
+    <artifactId>anubis</artifactId>
+    <version>2019.17.01</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.10.RELEASE</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
+            <version>1.9.13</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vladmihalcea</groupId>
+            <artifactId>hibernate-types-52</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+
+        <!-- FTP -->
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <!-- Dropbox -->
+        <dependency>
+            <groupId>com.dropbox.core</groupId>
+            <artifactId>dropbox-core-sdk</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+
+
+        <!-- Verificar com os BOSSES de criar um anubis-test pra ter escopo so de test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <!-- 			<scope>test</scope> -->
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <!-- 			<scope>test</scope> -->
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.9</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <destFile>${sonar.jacoco.reportPath}</destFile>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <!-- <build> -->
+    <!-- <plugins> -->
+    <!-- <plugin> -->
+    <!-- <groupId>org.springframework.boot</groupId> -->
+    <!-- <artifactId>spring-boot-maven-plugin</artifactId> -->
+    <!-- PHILIPE VERIFICAR ISSO AQUI, PROVAVEL DE TE Q CRIAR POM MULTIMODULOS -->
+    <!-- <configuration> -->
+    <!-- <mainClass>br.com.sistemasactus.ApplicationManager</mainClass> -->
+    <!-- <layout>JAR</layout> -->
+    <!-- </configuration> -->
+    <!-- <executions> -->
+    <!-- <execution> -->
+    <!-- <goals> -->
+    <!-- <goal>repackage</goal> -->
+    <!-- </goals> -->
+    <!-- <configuration> -->
+    <!-- <filters> -->
+    <!-- <filter> -->
+    <!-- <artifact>*:*</artifact> -->
+    <!-- <excludes> -->
+    <!-- <exclude>META-INF/*.SF</exclude> -->
+    <!-- <exclude>META-INF/*.DSA</exclude> -->
+    <!-- <exclude>META-INF/*.RSA</exclude> -->
+    <!-- </excludes> -->
+    <!-- </filter> -->
+    <!-- </filters> -->
+    <!-- </configuration> -->
+    <!-- </execution> -->
+    <!-- </executions> -->
+    <!-- </plugin> -->
+    <!-- </plugins> -->
+    <!-- </build> -->
+
+    <profiles>
+        <profile>
+            <id>develop</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profile.name>develop</profile.name>
+            </properties>
+            <distributionManagement>
+                <repository>
+                    <id>nexus</id>
+                    <url>http://nexus.hawksystems.com.br/nexus/content/repositories/thirdparty/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>production</id>
+            <properties>
+                <profile.name>production</profile.name>
+            </properties>
+            <distributionManagement>
+                <repository>
+                    <id>nexus</id>
+                    <url>http://nexus.hawksystems.com.br/nexus/content/repositories/thirdparty/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>homolog</id>
+            <properties>
+                <profile.name>homolog</profile.name>
+            </properties>
+            <distributionManagement>
+                <repository>
+                    <id>nexus</id>
+                    <url>http://nexus.hawksystems.com.br/nexus/content/repositories/thirdparty/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
+
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+</project>
