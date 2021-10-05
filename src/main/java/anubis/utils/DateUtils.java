@@ -132,7 +132,15 @@ public class DateUtils {
 		}
 		return null;
 	}
-	
+
+	public static String getDiaMesAnoHoraMinutoSegundoPortugues(Calendar date) {
+		if (date != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			return sdf.format(date.getTime());
+		}
+		return null;
+	}
+
 	public static String getDiaMesAnoTHoraMinutoSegundo(Calendar date) {
 		if (date != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
